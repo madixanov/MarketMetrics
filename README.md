@@ -23,12 +23,13 @@ MarketMetrics/
 │ ├── start.py
 │ ├── help.py
 │ └── market.py
-├── services/ # Business logic and background operations
-│ ├── parser.py # Marketplace data parser (Selenium)
-│ ├── database.py # Data storage and management
-├── data/ # Static data and datasets
+├── keyboards/ # Inline buttons
+│ └── inline.py
+├── scrapers/ # Gets data from marketplaces
 │ ├── categories.json
-│ └── products.json
+│ ├── products.json
+│ ├──uzum_scraper.py
+│ └── yandex_scraper.py
 ├── .env # Environment configuration file
 ├── requirements.txt # Dependencies list
 └── README.md # Project documentation
@@ -54,3 +55,4 @@ MarketMetrics/
 - **Asyncio** – concurrency for polling and tasks  
 - **python-dotenv** – environment variable management  
 - **JSON** – data storage and configuration  
+
