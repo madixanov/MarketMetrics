@@ -4,6 +4,9 @@ from keyboards import start_keyboard
 
 help_router = Router()
 
+# =============
+# Command /help
+# =============
 @help_router.message(Command("help"))
 async def help_command(message: types.Message):
     help_text = (

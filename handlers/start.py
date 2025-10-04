@@ -4,6 +4,10 @@ from keyboards import marketplace_keyboard
 
 start_router = Router()
 
+
+# ==============
+# Command /start
+# ==============
 @start_router.message(CommandStart())
 async def program_start(message: types.Message):
     user = message.from_user.first_name
@@ -20,6 +24,10 @@ async def program_start(message: types.Message):
     )
     await message.answer(hello_text, parse_mode="Markdown", reply_markup=marketplace_keyboard())
 
+
+# ==============
+# Button "Start"
+# ==============
 @start_router.callback_query(lambda c: c.data == "start_bot")
 async def start_button(callback: types.CallbackQuery):
     if callback.message:

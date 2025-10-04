@@ -4,13 +4,21 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from config import CHROME_PATH
 import json
 import time
-from config import CHROME_PATH
 
+
+# =========
+# Constants
+# =========
 OUTPUT_CATEGORY_FILE = "categories.json"
 OUTPUT_PRODUCT_FILE = "products.json"
 
+
+# =============================
+# Fetchimg Categories from Uzum
+# =============================
 def get_uzum_categories(link):
     options = Options()
     options.add_argument("--headless=new")
@@ -56,6 +64,9 @@ def get_uzum_categories(link):
     return all_categories
 
 
+# =============================
+# Fetchimg Products from Uzum
+# =============================
 def get_uzum_products(category_link):
     options = Options()
     options.add_argument("--headless=new")

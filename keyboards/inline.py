@@ -4,10 +4,18 @@ from pathlib import Path
 import hashlib
 import json
 
+
+# ================================
+# Absolute Path to categories.json
+# ================================
 CATEGORIES_PATH = Path(__file__).parent.parent / "scrapers" / "categories.json"
 
+
+# ===============================
+# Loading category data from JSON
+# ===============================
 def load_uzum_categories():
-    """Безопасная загрузка категорий из JSON"""
+    """Safe load"""
     try:
         with open(CATEGORIES_PATH, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -16,7 +24,11 @@ def load_uzum_categories():
             return []
     except (json.JSONDecodeError, FileNotFoundError):
         return []
-    
+
+
+# ============
+# Start Button
+# ============
 def start_keyboard():
     kb = InlineKeyboardBuilder()
     kb.row(
@@ -24,6 +36,10 @@ def start_keyboard():
     )
     return kb.as_markup()
 
+
+# ===================
+# Marketplace Buttons
+# ===================
 def marketplace_keyboard():
     kb = InlineKeyboardBuilder()
     kb.row(
@@ -32,9 +48,17 @@ def marketplace_keyboard():
     )
     return kb.as_markup()
 
+
+# ==========
+# Pagination
+# ==========
 CATEGORIES_PAGE_SIZE = 6
 PRODUCTS_PAGE_SIZE = 6
 
+
+# =======================
+# Uzum Categories Buttons
+# =======================
 def uzum_categories_keyboard(categories, page: int = 0):
     total = len(categories)
     start = page * CATEGORIES_PAGE_SIZE
@@ -60,6 +84,10 @@ def uzum_categories_keyboard(categories, page: int = 0):
 
     return kb.as_markup()
 
+
+# =======================
+# Uzum Products Buttons
+# =======================
 def uzum_products_keyboard(products, page=0):
     kb = InlineKeyboardBuilder()
     start = page * PRODUCTS_PAGE_SIZE
@@ -83,6 +111,10 @@ def uzum_products_keyboard(products, page=0):
 
     return kb.as_markup()
 
+
+# ============================
+# Uzum Product Details Buttons
+# ============================
 def uzum_product_details_keyboard(product):
     kb = InlineKeyboardBuilder()
 
@@ -92,6 +124,9 @@ def uzum_product_details_keyboard(product):
     return kb.as_markup()
 
 
+# =======================
+# Yandex Categories Buttons
+# =======================
 def yandex_categories_keyboard():
     kb = InlineKeyboardBuilder()
     kb.add(InlineKeyboardButton(text="🔙 Назад", callback_data="start_bot"))

@@ -14,20 +14,20 @@ import hashlib
 market_router = Router()
 
 # ==============================
-# Константы
+# Constants
 # ==============================
-PAGE_SIZE = 6  # количество категорий на странице
-PRODUCTS_PAGE_SIZE = 6  # количество товаров на странице
+PAGE_SIZE = 6  
+PRODUCTS_PAGE_SIZE = 6  
 
 # ==============================
-# Кэши для пользователей
+# Caches for users
 # ==============================
-categories_cache = {}  # {chat_id: categories}
-products_cache = {}    # {chat_id: products}
+categories_cache = {} 
+products_cache = {}   
 
 
 # ==============================
-# Команда /uzum
+# Command /uzum
 # ==============================
 @market_router.message(Command("uzum"))
 async def market_uzum(message: types.Message):
@@ -57,7 +57,7 @@ async def market_uzum(message: types.Message):
 
 
 # ==============================
-# Пагинация категорий
+# Category pagination
 # ==============================
 @market_router.callback_query(lambda c: c.data.startswith("uzum_page_"))
 async def uzum_categories_pagination(callback: types.CallbackQuery):
@@ -79,12 +79,9 @@ async def uzum_categories_pagination(callback: types.CallbackQuery):
     )
 
 
-# ==============================
-# Выбор категории и загрузка товаров
-# ==============================
-# ==============================
-# Выбор категории и загрузка товаров (кнопки, без текста)
-# ==============================
+# =======================================
+# Category selection and showing products
+# =======================================
 @market_router.callback_query(lambda c: c.data.startswith("uzum_"))
 async def uzum_category_callback(callback: types.CallbackQuery):
     await callback.answer()
@@ -109,10 +106,8 @@ async def uzum_category_callback(callback: types.CallbackQuery):
         await callback.message.answer("Пока нет товаров в этой категории 😢")
         return
 
-    # Сохраняем товары в кэш
     products_cache[chat_id] = products
 
-    # Редактируем сообщение: текст небольшой, кнопки — товары
     await callback.message.edit_text(
         f"🛒 Товары категории **{category['title']}**. Выберите товар ⬇️",
         parse_mode="Markdown",
@@ -121,7 +116,7 @@ async def uzum_category_callback(callback: types.CallbackQuery):
 
 
 # ==============================
-# Пагинация товаров
+# Products pagintaion
 # ==============================
 @market_router.callback_query(lambda c: c.data.startswith("products_page_"))
 async def uzum_products_pagination(callback: types.CallbackQuery):
@@ -146,6 +141,10 @@ async def uzum_products_pagination(callback: types.CallbackQuery):
         reply_markup=uzum_products_keyboard(products, page)
     )
 
+
+# ===========================
+# Button "Back to categories"
+# ===========================
 @market_router.callback_query(lambda c: c.data.startswith("back_to_categories"))
 async def back_to_categories(callback: types.CallbackQuery):
     if callback.message:
@@ -153,6 +152,10 @@ async def back_to_categories(callback: types.CallbackQuery):
     await callback.answer()
     await market_uzum(callback.message)
 
+
+# ===============
+# Product Details
+# ===============
 @market_router.callback_query(lambda c: c.data.startswith("product_"))
 async def product_detail_callback(callback: types.CallbackQuery):
     await callback.answer()
@@ -177,6 +180,10 @@ async def product_detail_callback(callback: types.CallbackQuery):
 
     await callback.message.answer(text, parse_mode="Markdown", reply_markup=uzum_product_details_keyboard(product))
 
+
+# =========================
+# Button "Back to products"
+# =========================
 @market_router.callback_query(lambda c: c.data.startswith("back_to_products"))
 async def back_to_products(callback: types.CallbackQuery):
     if callback.message:
@@ -185,7 +192,7 @@ async def back_to_products(callback: types.CallbackQuery):
 
 
 # ==============================
-# Выбор маркетплейса
+# Choosing marketplace
 # ==============================
 @market_router.callback_query(lambda c: c.data.startswith("market_"))
 async def callback_market(callback: types.CallbackQuery):
@@ -204,7 +211,7 @@ async def callback_market(callback: types.CallbackQuery):
 
 
 # ==============================
-# Кнопка "Назад" в главное меню
+# Button "Back"
 # ==============================
 @market_router.callback_query(lambda c: c.data == "back_home")
 async def callback_back_home(callback: types.CallbackQuery):
