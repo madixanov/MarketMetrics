@@ -1,0 +1,1 @@
+from .uzum_scraper import get_uzum_categories, get_uzum_products
