@@ -1,0 +1,4 @@
+Libraries:
+  aiogram,
+  selenium,
+  python-dotenv
