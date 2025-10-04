@@ -28,7 +28,7 @@ MarketMetrics/
 ├── scrapers/ # Gets data from marketplaces
 │ ├── categories.json
 │ ├── products.json
-│ ├──uzum_scraper.py
+│ ├── uzum_scraper.py
 │ └── yandex_scraper.py
 ├── .env # Environment configuration file
 ├── requirements.txt # Dependencies list
@@ -55,4 +55,5 @@ MarketMetrics/
 - **Asyncio** – concurrency for polling and tasks  
 - **python-dotenv** – environment variable management  
 - **JSON** – data storage and configuration  
+
 
