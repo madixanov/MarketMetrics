@@ -1,6 +1,6 @@
 # 🛒 MarketMetrics
 
-**MarketMetrics** is a Telegram bot that collects and analyzes data from online marketplaces.  
+**MarketMetrics** (@PriceInsiderBot in Telegram) is a Telegram bot that collects and analyzes data from online marketplaces.  
 It allows users to track product categories, prices, and performance metrics directly in Telegram.
 
 ---
@@ -55,5 +55,6 @@ MarketMetrics/
 - **Asyncio** – concurrency for polling and tasks  
 - **python-dotenv** – environment variable management  
 - **JSON** – data storage and configuration  
+
 
 
