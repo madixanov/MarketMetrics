@@ -142,7 +142,6 @@ Scraped data will be saved to:
 
 ```bash
 categories.json — marketplace categories
-
 products.json — products and prices
 ```
 
@@ -177,10 +176,11 @@ Command	Description
 Technology	Purpose
 
 ```bash
-Python 3.11+	Core language
-Aiogram	Telegram bot framework
-Selenium	Web automation and scraping
-Asyncio	Asynchronous operations
-python-dotenv	Environment configuration
-JSON	Local data storage
+Python 3.11+	-> Core language
+Aiogram ->	Telegram bot framework
+Selenium	-> Web automation and scraping
+Asyncio ->	Asynchronous operations
+python-dotenv ->	Environment configuration
+JSON ->	Local data storage
 ```
+
