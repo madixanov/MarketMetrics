@@ -38,7 +38,7 @@ def get_uzum_categories(link):
         catalog_btn.click()
         time.sleep(2)
 
-        # Обычные категории
+        # Default categories
         categories = driver.find_elements(By.CSS_SELECTOR, "a[href^='/ru/category/']")
         for category in categories:
             title = category.text.strip()
@@ -46,7 +46,7 @@ def get_uzum_categories(link):
             if title:
                 all_categories.append({"title": title, "url": href, "type": "category"})
 
-        # Добавляем промо “Товары недели”
+        # Category "Top of the week"
         promo_link = "https://uzum.uz/ru/category/tovary-nedeli--895"
         all_categories.insert(0, {
             "title": "Товары недели",
@@ -57,7 +57,6 @@ def get_uzum_categories(link):
     finally:
         driver.quit()
 
-    # Сохраняем
     with open(OUTPUT_CATEGORY_FILE, "w", encoding="utf-8") as f:
         json.dump(all_categories, f, ensure_ascii=False, indent=4)
 
