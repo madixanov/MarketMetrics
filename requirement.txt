@@ -1,4 +1,8 @@
 Libraries:
   aiogram,
   selenium,
-  python-dotenv
+  python-dotenv,
+  logging,
+  asyncio,
+  json,
+  hashlib
