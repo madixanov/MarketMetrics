@@ -5,6 +5,58 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from config import CHROME_PATH
+import time
+import json
+
+OUTPUT_CATEGORY_FILE = "categories.json"
+
+# =============================
+# Fetchimg Categories from Yandex
+# =============================
+def get_yandex_categories(link):
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36")
+
+    driver = webdriver.Chrome(service=Service(CHROME_PATH), options=options)
+    all_categories = []
+
+    try:
+        driver.get(link)
+        wait = WebDriverWait(driver, 15)
+
+        catalog_btn = WebDriverWait(driver, 15).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "div[data-zone-name='catalog']"))
+        )
+        catalog_btn.click()
+        time.sleep(2)
+
+        categories = wait.until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "a[href^='/catalog']"))
+        )
+        for category in categories:
+            try:
+                spans = category.find_elements(By.CSS_SELECTOR, "span._3W4t0")
+                if spans:
+                    title = spans[0].text.strip()
+                else:
+                    continue
+
+                href = category.get_attribute("href")
+                if title and href:
+                    all_categories.append({"title": title, "url": href})
+            except Exception as e:
+                print("Ошибка при извлечении категории: ", e)
+    
+    finally:
+        driver.quit()
+
+    with open(OUTPUT_CATEGORY_FILE, "w", encoding="utf-8") as f:
+        json.dump(all_categories, f, ensure_ascii=False, indent=4)
+
+    return all_categories
 
 
 # =============================
@@ -22,7 +74,7 @@ def get_yandex_products(category_link):
 
     try:
         driver.get(category_link)
-        wait = WebDriverWait(driver, 10)
+        wait = WebDriverWait(driver, 15)
 
         products_cards = wait.until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, '[data-id]'))
@@ -35,12 +87,25 @@ def get_yandex_products(category_link):
                 title = "Нет названия"
 
             try:
-                price = card.find_element(By.CSS_SELECTOR, '[data-zone-name="price"]').text
+                price_element = card.find_element(By.CSS_SELECTOR, '.ds-text_color_price-sale.ds-text_headline-5_bold')
+                price = price_element.text.strip()
             except:
                 price = "Нет цены"
 
             try:
-                rating = card.find_element(By.CSS_SELECTOR, '[data-zone-name="rating"]').text
+                rating_block = card.find_element(By.CSS_SELECTOR, '[data-zone-name="rating"]')
+                hidden_spans = rating_block.find_elements(By.CSS_SELECTOR, '.ds-visuallyHidden')
+
+                if len(hidden_spans) >= 2:
+                    rating_text = hidden_spans[0].text  # "Рейтинг товара: 4.9 из 5"
+                    count_text = hidden_spans[1].text  # "на основе 49 оценок"
+
+                    import re
+                    rating_value = re.search(r"([\d.]+)", rating_text).group(1)
+                    count_value = re.search(r"(\d+)", count_text).group(1)
+                    rating = f"{rating_value} на основе {count_value} оценок"
+                else:
+                    rating = "Нет рейтинга"
             except:
                 rating = "Нет рейтинга"
 
@@ -53,7 +118,7 @@ def get_yandex_products(category_link):
                 "title": title,
                 "price": price,
                 "rating": rating,
-                "link": link
+                "url": link
             })
 
         return all_products

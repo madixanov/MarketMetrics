@@ -1,279 +1,87 @@
 [
     {
-        "title": "Смартфон Redmi 15, 8/256 ГБ, 6.9\" IPS-дисплей, 50 Мп, 7000 мАч, быстрая зарядка 33 Вт",
-        "price": "2 235 000",
-        "price_per_month": "127 429 сум/мес",
-        "url": "https://uzum.uz/ru/product/smartfon-redmi-15-fioletovyj---130-1868922"
-    },
-    {
-        "title": "Кроссовки без шнурков Li-Ning Soft Go 2 AGLV005",
-        "price": "589 000",
-        "price_per_month": "41 720 сум/мес",
-        "url": "https://uzum.uz/ru/product/krossovki-bez-shnurkov-lining-soft-go-bezhevyj---11-1638203"
-    },
-    {
-        "title": "Набор ключей инструментов, для дома и автомобиля LFINE 46/94/108/110/121/216 предметов",
-        "price": "343 990",
-        "price_per_month": "24 365 сум/мес",
-        "url": "https://uzum.uz/ru/product/nabor-klyuchej-instrumentov-zolotoj---133-1705853"
-    },
-    {
-        "title": "Инозитол 1000 мг, для похудения, для планирования беременности",
-        "price": "133 450",
-        "price_per_month": "9 452 сум/мес",
-        "url": "https://uzum.uz/ru/product/inozitol-1000-mg-1565621"
-    },
-    {
-        "title": "Газовая плита Ferre BT60G 57л, 4 газ конфорки, стальная решетка",
-        "price": "1 599 000",
-        "price_per_month": "113 262 сум/мес",
-        "url": "https://uzum.uz/ru/product/gazovaya-plita-ferre-tyomno-korichnevyj---259-1596757"
-    },
-    {
-        "title": "Тренч для детей на каждый день",
-        "price": "217 000",
-        "price_per_month": "15 370 сум/мес",
-        "url": "https://uzum.uz/ru/product/trench-dlya-detej-na-kazhdyj-den-temno-sinij---209-1818517"
-    },
-    {
-        "title": "Чайник ZEPTER, металлический, со свистком для всех видов плит, 3.2 л",
-        "price": "95 000",
-        "price_per_month": "6 729 сум/мес",
-        "url": "https://uzum.uz/ru/product/chajnik-zepter-metallicheskij-chernyj---1-1169516"
-    },
-    {
-        "title": "Акустическая гитара",
-        "price": "299 000",
-        "price_per_month": "21 179 сум/мес",
-        "url": "https://uzum.uz/ru/product/akusticheskaya-gitara-korichnevyj---6-1924799"
-    },
-    {
-        "title": "Кольцо из серебра SOKOLOV, 94012644,94012944,94013712,94010157,94013252,94013357,94011290",
-        "price": "309 000",
-        "price_per_month": "21 887 сум/мес",
-        "url": "https://uzum.uz/ru/product/kolco-iz-serebra-goluboj---127-1954226"
-    },
-    {
-        "title": "Обои виниловые на флизелиновой основе, моющиеся, декоративные, влагостойкие",
-        "price": "59 990",
-        "price_per_month": "4 249 сум/мес",
-        "url": "https://uzum.uz/ru/product/oboi-vinilovye-na-molochnyj---257-1522198"
-    },
-    {
-        "title": "Велотренажер GF-1B, GF-13B для дома – кардио и фитнес тренировки",
-        "price": "1 899 000",
-        "price_per_month": "134 512 сум/мес",
-        "url": "https://uzum.uz/ru/product/velotrenazher-gf1b-gf13b-khrom---290-1832995"
-    },
-    {
-        "title": "Пылесос Magna VCH2314, 1200 Вт мощность, 2 л объём",
-        "price": "599 000",
-        "price_per_month": "42 429 сум/мес",
-        "url": "https://uzum.uz/ru/product/pylesos-magna-vch2314-1200-vt-moschnost-krasnyj---13-1808467"
-    },
-    {
-        "title": "Платье макси с поясом и длинными рукавами",
-        "price": "299 000",
-        "price_per_month": "21 179 сум/мес",
-        "url": "https://uzum.uz/ru/product/plate-maksi-s-poyasom-i-dlinnymi-zolotistyj-khaki---272-1849584"
-    },
-    {
-        "title": "Чехол для автомобиля Cardinar Alfa Gentra, Cobalt, Spark, Nexia, Onix, Monza",
-        "price": "860 310",
-        "price_per_month": "60 938 сум/мес",
-        "url": "https://uzum.uz/ru/product/chekhol-dlya-avtomobilya-278804"
-    },
-    {
-        "title": "Жидкий стиральный порошок DENDR, 5 литров",
-        "price": "35 990",
-        "price_per_month": "2 549 сум/мес",
-        "url": "https://uzum.uz/ru/product/zhidkij-stiralnyj-poroshok-dendr-5-litrov-mango---117-1079386"
-    },
-    {
-        "title": "Щипцы для моделирования Polaris PHS 2511K Бирюзовые",
-        "price": "209 000",
-        "price_per_month": "14 804 сум/мес",
-        "url": "https://uzum.uz/ru/product/schipcy-dlya-modelirovaniya-1756525"
-    },
-    {
-        "title": "Джинсы SADÓ мужские REGULAR",
-        "price": "259 000",
-        "price_per_month": "18 345 сум/мес",
-        "url": "https://uzum.uz/ru/product/dzhinsy-sad-muzhskie-regular-sinij---125-1770216"
-    },
-    {
-        "title": "Сухой корм для кошек Proхвост, говядина, 10 кг, 50 PH 639",
-        "price": "337 500",
-        "price_per_month": "23 906 сум/мес",
-        "url": "https://uzum.uz/ru/product/sukhoj-korm-dlya-114155"
-    },
-    {
-        "title": "Смартфон Redmi Note 14, 8GB+256GB, AMOLED 120Hz дисплей, 6,67\"",
-        "price": "1 879 000",
-        "price_per_month": "133 095 сум/мес",
-        "url": "https://uzum.uz/ru/product/smartfon-redmi-note-svetlo-sinij---281-1436215"
-    },
-    {
-        "title": "Подсолнечное масло Щедрое лето, рафинированное, 5 л х 3шт",
-        "price": "324 990",
-        "price_per_month": "23 020 сум/мес",
-        "url": "https://uzum.uz/ru/product/podsolnechnoe-maslo-schedroe-1840976"
-    },
-    {
-        "title": "Холодильник бытовой Ferre BCD-275/ BCD-275 IX, 225 л, двухкамерный",
-        "price": "2 099 000",
-        "price_per_month": "148 679 сум/мес",
-        "url": "https://uzum.uz/ru/product/kholodilnik-bytovoj-ferre-belyj---5-881911"
-    },
-    {
-        "title": "Детская игровая палатка, домик для детей и игрушек, для дома и улицы",
-        "price": "129 990",
-        "price_per_month": "9 207 сум/мес",
-        "url": "https://uzum.uz/ru/product/detskaya-igrovaya-palatka-krasnyj---13-805843"
-    },
-    {
-        "title": "Коляска с перекидной ручкой Start joy ST-03",
-        "price": "719 900",
-        "price_per_month": "50 992 сум/мес",
-        "url": "https://uzum.uz/ru/product/kolyaska-s-perekidnoj-ruchkoj-start-joy-zelenyj---120-1688104"
-    },
-    {
-        "title": "L'Oreal Paris Шампунь Преображение \"Elseve, Длина Мечты\", с кератином, 400 мл",
-        "price": "35 990",
-        "price_per_month": "2 549 сум/мес",
-        "url": "https://uzum.uz/ru/product/loreal-paris-shampun-7636"
-    },
-    {
-        "title": "Крем для лица L'Oreal Paris Hyaluron Expert SPF20, дневной, 50 мл",
-        "price": "57 990",
-        "price_per_month": "4 107 сум/мес",
-        "url": "https://uzum.uz/ru/product/krem-dlya-lica-12309"
-    },
-    {
-        "title": "Гель для стирки Persil Color Gel, для цветного, 3.9 л",
-        "price": "209 990",
-        "price_per_month": "14 874 сум/мес",
-        "url": "https://uzum.uz/ru/product/gel-dlya-stirki-1539248"
-    },
-    {
-        "title": "Кислородный очиститель, отбеливатель, пятновыводитель Bavi 300 гр+50 гр, без запаха, безопасный",
-        "price": "39 990",
-        "price_per_month": "2 832 сум/мес",
-        "url": "https://uzum.uz/ru/product/kislorodnyj-ochistitel-otbelivatel-1202374"
-    },
-    {
-        "title": "Смартфон HUAWEI Nova Y72S 8/128 ГБ, 50 МП+8 МП, 6000 мА/ч, SuperCharge 22,5 Вт, IMEI",
-        "price": "1 599 000",
-        "price_per_month": "113 262 сум/мес",
-        "url": "https://uzum.uz/ru/product/smartfon-huawei-nova-chernyj---1-1917906"
-    },
-    {
-        "title": "Кислородный пятновыводитель, 1 кг, отбеливатель, очиститель, порошок BRANDFREE",
-        "price": "59 990",
-        "price_per_month": "4 249 сум/мес",
-        "url": "https://uzum.uz/ru/product/kislorodnyj-pyatnovyvoditel-1-1062138"
-    },
-    {
-        "title": "Газированный напиток Pepsi, 1 л",
-        "price": "8 490",
-        "price_per_month": "601 сум/мес",
-        "url": "https://uzum.uz/ru/product/gazirovannyj-napitok-pepsi-1-l-153163"
-    },
-    {
-        "title": "Крем для лица NIVEA Care, с маслом ши, 100 мл",
-        "price": "45 990",
-        "price_per_month": "3 257 сум/мес",
-        "url": "https://uzum.uz/ru/product/krem-dlya-lica-nivea-care-s-21478"
-    },
-    {
-        "title": "Смартфон Samsung Galaxy A17, 6.7\" 90Гц экран, камера 50Мп, батарея 5000 мАч",
-        "price": "2 189 000",
-        "price_per_month": "155 054 сум/мес",
-        "url": "https://uzum.uz/ru/product/smartfon-samsung-galaxy-seryj---3-1965700"
-    },
-    {
-        "title": "Кожаная куртка женская оверсайз косуха демисезонная короткая",
-        "price": "285 000",
-        "price_per_month": "20 187 сум/мес",
-        "url": "https://uzum.uz/ru/product/kozhanaya-kurtka-zhenskaya-chernyj---1-1888752"
-    },
-    {
-        "title": "Фарфоровый набор столовой посуды, 60 предметов, на 12 персон",
-        "price": "839 000",
-        "price_per_month": "59 429 сум/мес",
-        "url": "https://uzum.uz/ru/product/farforovyj-nabor-stolovoj-mango---117-1734953"
-    },
-    {
-        "title": "Виброплатформа, оборудование для похудения, 150 кг",
-        "price": "539 000",
-        "price_per_month": "38 179 сум/мес",
-        "url": "https://uzum.uz/ru/product/vibroplatforma-oborudovanie-dlya-pokhudeniya-150-kg-chernyj---1-1598041"
-    },
-    {
-        "title": "Epson L3250 Wi-Fi цветной принтер-сканер",
-        "price": "2 279 050",
-        "price_per_month": "161 432 сум/мес",
-        "url": "https://uzum.uz/ru/product/epson-l3250-wifi-cvetnoj-printerskaner-929540"
-    },
-    {
-        "title": "Куртка женская, ветровка с капюшоном осенняя, легкая куртка",
-        "price": "285 000",
-        "price_per_month": "20 187 сум/мес",
-        "url": "https://uzum.uz/ru/product/kurtka-zhenskaya-vetrovka-bezhevyj-melanzh---249-1916096"
-    },
-    {
-        "title": "Влажный корм для кошек Felix, говядина в желе, 75 г x 26 шт",
-        "price": "121 900",
-        "price_per_month": "8 634 сум/мес",
-        "url": "https://uzum.uz/ru/product/vlazhnyj-korm-dlya-1006761"
-    },
-    {
-        "title": "Смартфон Samsung Galaxy A56 5G, 8GB 256GB, SAMOLED 120Hz 6.7\", 5000 mAh",
-        "price": "4 579 000",
-        "price_per_month": "324 345 сум/мес",
-        "url": "https://uzum.uz/ru/product/smartfon-samsung-galaxy-chernyj---1-1599024"
-    },
-    {
-        "title": "Мужской спортивный комплект, двойка",
-        "price": "179 000",
-        "price_per_month": "12 679 сум/мес",
-        "url": "https://uzum.uz/ru/product/muzhskoj-sportivnyj-komplekt-dvojka-chernyj---1-1902154"
-    },
-    {
-        "title": "Электропростынь, электрическое одеяло, электроматрас",
-        "price": "229 000",
-        "price_per_month": "16 220 сум/мес",
-        "url": "https://uzum.uz/ru/product/elektroprostyn-elektricheskoe-odeyalo-sinij---125-730275"
-    },
-    {
-        "title": "Беговая дорожка HOMIIX W-120, компактная, бесшумная, вес пользователя до 120кг *RT3/12KMH",
-        "price": "2 399 000",
-        "price_per_month": "169 929 сум/мес",
-        "url": "https://uzum.uz/ru/product/begovaya-dorozhka-homiix-chernyj---1-1909306"
-    },
-    {
-        "title": "Умная колонка Яндекс Станция Миди",
-        "price": "1 990 000",
-        "price_per_month": "140 958 сум/мес",
-        "url": "https://uzum.uz/ru/product/umnaya-kolonka-yandeks-stanciya-midi-chernyj---1-1618986"
-    },
-    {
-        "title": "Куртка женская, стеганая, легкая, на пуговицах, без капюшона МАЛОМЕРИТ НА 2 РАЗМЕРА",
-        "price": "285 000",
-        "price_per_month": "20 187 сум/мес",
-        "url": "https://uzum.uz/ru/product/kurtka-zhenskaya-steganaya-chernyj---1-1888815"
-    },
-    {
-        "title": "\"Маърифатли онг мактаби\" Марииям Махмудова (ўзбек тилида)",
-        "price": "427 500",
-        "price_per_month": "30 281 сум/мес",
-        "url": "https://uzum.uz/ru/product/marifatli-ong-maktabi-1906675"
-    },
-    {
-        "title": "Влажный корм Darling, для взрослых кошек, с ягненком в соусе, 75 г х 26 шт",
+        "title": "Кроссовки Yeezy для мальчиков, 40-44",
         "price": "99 000",
         "price_per_month": "7 012 сум/мес",
-        "url": "https://uzum.uz/ru/product/vlazhnyj-korm-darling-1006777"
+        "url": "https://uzum.uz/ru/product/krossovki-yeezy-dlya-malchikov-4044-serebryanyj---4-1679195"
+    },
+    {
+        "title": "Женские элегантные туфли – для повседневной и праздничной одежды",
+        "price": "79 900",
+        "price_per_month": "5 659 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-elegantnye-tufli-belyj---5-1976655"
+    },
+    {
+        "title": "Мужские кроссовки",
+        "price": "111 000",
+        "price_per_month": "7 862 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-krossovki-1552187"
+    },
+    {
+        "title": "Удобные кроссовки для мужчин",
+        "price": "400 000",
+        "price_per_month": "28 333 сум/мес",
+        "url": "https://uzum.uz/ru/product/udobnye-krossovki-dlya-muzhchin-indigo---251-1611889"
+    },
+    {
+        "title": "Кроссовки унисекс для мужчин и женщин, на лето-весну-осень-зиму, размер 39-44",
+        "price": "95 000",
+        "price_per_month": "6 729 сум/мес",
+        "url": "https://uzum.uz/ru/product/krossovki-uniseks-dlya-belyj---5-1659259"
+    },
+    {
+        "title": "Домашние тапочки для женщин тапочки для дома 36-41, мягкие удобные тапочки, домашняя обувь",
+        "price": "44 580",
+        "price_per_month": "3 157 сум/мес",
+        "url": "https://uzum.uz/ru/product/domashnie-tapochki-dlya-vishnyovyj---265-1955076"
+    },
+    {
+        "title": "Удобные кроссовки для мужчин",
+        "price": "400 000",
+        "price_per_month": "28 333 сум/мес",
+        "url": "https://uzum.uz/ru/product/udobnye-krossovki-dlya-muzhchin-lesnoj-zelenyj---121-1611889"
+    },
+    {
+        "title": "Женские тапочки/Женские тапочки/женские тапочки/тапочки/тапочки с лентами",
+        "price": "47 900",
+        "price_per_month": "3 392 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-tapochkizhenskie-tapochkizhenskie-bezhevyj-melanzh---249-1969303"
+    },
+    {
+        "title": "Обувь женская, шлепки женские, женская обувь на лето, размеры 36–40, в 3-ти разных цветах",
+        "price": "88 980",
+        "price_per_month": "6 302 сум/мес",
+        "url": "https://uzum.uz/ru/product/obuv-zhenskaya-shlepki-chernyj---1-1955981"
+    },
+    {
+        "title": "Мужские кроссовки, мужская обувь",
+        "price": "99 000",
+        "price_per_month": "7 012 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-krossovki-muzhskaya-obuv-goluboj---127-949351"
+    },
+    {
+        "title": "Мужские, угги, тапочки, теплые, для дома и улицы, 36-45",
+        "price": "79 000",
+        "price_per_month": "5 595 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-uggi-tapochki-chernyj---1-1855534"
+    },
+    {
+        "title": "Женские ЛОФЕРЫ, обувь, мокасины, осенние туфли, 36-40",
+        "price": "133 000",
+        "price_per_month": "9 420 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-lofery-obuv-chernyj---1-1910998"
+    },
+    {
+        "title": "Мужские кеды, мужская обувь",
+        "price": "99 000",
+        "price_per_month": "7 012 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-kedy-muzhskaya-obuv-belyj---5-1088281"
+    },
+    {
+        "title": "Женские спортивные кроссовки – удобные и стильные, для повседневной носки",
+        "price": "99 000",
+        "price_per_month": "7 012 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-sportivnye-krossovki-belyj---5-1987645"
     },
     {
         "title": "Кроссовки мужские DISHER MaxTrack, удобные, повседневные маломерят на 1 размер",
@@ -282,9 +90,201 @@
         "url": "https://uzum.uz/ru/product/krossovki-muzhskie-disher-seryj---3-1445620"
     },
     {
-        "title": "Масло подсолнечное ЛЕЯ, рафинированное 5 литров, 6 штук",
-        "price": "599 990",
-        "price_per_month": "42 499 сум/мес",
-        "url": "https://uzum.uz/ru/product/maslo-podsolnechnoe-leya-1983665"
+        "title": "Кроссовки унисекс для мужчин и женщин, на лето-весну-осень-зиму, размер 35-44",
+        "price": "149 000",
+        "price_per_month": "10 554 сум/мес",
+        "url": "https://uzum.uz/ru/product/krossovki-uniseks-dlya-1088324"
+    },
+    {
+        "title": "Кроссовки Campus, унисекс, для мужчин и женщин, берите на размер больше",
+        "price": "119 000",
+        "price_per_month": "8 429 сум/мес",
+        "url": "https://uzum.uz/ru/product/krossovki-campus-uniseks-chernyj---1-1471123"
+    },
+    {
+        "title": "Женские домашние тапочки, меховые, с бантиком",
+        "price": "44 000",
+        "price_per_month": "3 116 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-domashnie-tapochki-mekhovye-s-bantikom-vishnyovyj---265-1916519"
+    },
+    {
+        "title": "Слипоны женские, дышащие, текстильные, летние, размеры 36-41",
+        "price": "69 000",
+        "price_per_month": "4 887 сум/мес",
+        "url": "https://uzum.uz/ru/product/slipony-zhenskie-dyshaschie-chernyj---1-1656473"
+    },
+    {
+        "title": "Зимние ботинки для детей, 1 размер маломерит",
+        "price": "149 000",
+        "price_per_month": "10 554 сум/мес",
+        "url": "https://uzum.uz/ru/product/zimnie-botinki-dlya-detej-1-razmer-khrom---290-1988726"
+    },
+    {
+        "title": "Мокасины женские, лоферы, обувь женская 36-40 размер лоро пиана",
+        "price": "66 000",
+        "price_per_month": "4 675 сум/мес",
+        "url": "https://uzum.uz/ru/product/mokasiny-zhenskie-lofery-chernyj---1-1179555"
+    },
+    {
+        "title": "Мужские кроссовки, обувь, размер 39 - 47",
+        "price": "99 000",
+        "price_per_month": "7 012 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-krossovki-obuv-razmer-39-47-chernyj---1-1652920"
+    },
+    {
+        "title": "Кроссовки мужские DISHER MaxTrack, удобные, повседневные маломерят на 1 размер",
+        "price": "115 000",
+        "price_per_month": "8 145 сум/мес",
+        "url": "https://uzum.uz/ru/product/krossovki-muzhskie-disher-belyj---5-1445620"
+    },
+    {
+        "title": "Стельки против неприятных запахов, размеры от 36 до 45",
+        "price": "18 000",
+        "price_per_month": "1 275 сум/мес",
+        "url": "https://uzum.uz/ru/product/stelki-protiv-nepriyatnykh-alyj---266-572387"
+    },
+    {
+        "title": "Мужские кроссовки",
+        "price": "77 000",
+        "price_per_month": "5 454 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-krossovki-tyomno-seryj---254-1602073"
+    },
+    {
+        "title": "Полусапоги женские зимние DISHER SoftHug, утеплённые и удобные",
+        "price": "207 000",
+        "price_per_month": "14 662 сум/мес",
+        "url": "https://uzum.uz/ru/product/polusapogi-zhenskie-zimnie-chernyj---1-1961310"
+    },
+    {
+        "title": "Кроссовки мужские, весна-осень, непромокаемые, размер 39-44, 1 размер маломерка",
+        "price": "169 000",
+        "price_per_month": "11 970 сум/мес",
+        "url": "https://uzum.uz/ru/product/krossovki-muzhskie-vesnaosen-chernoe-steklo---1011-1263932"
+    },
+    {
+        "title": "Мужские слипоны в сетку, легкие, дышащие, летние, спортивные",
+        "price": "195 000",
+        "price_per_month": "13 812 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-slipony-v-temno-sinij---209-1015434"
+    },
+    {
+        "title": "Кроссовки Campus 36-44 для мужчин, детей и девочек",
+        "price": "133 000",
+        "price_per_month": "9 420 сум/мес",
+        "url": "https://uzum.uz/ru/product/krossovki-campus-3644-dlya-muzhchin-detej-chernyj---1-1319923"
+    },
+    {
+        "title": "Женские мокасины для осенне весеннего сезона мягкие и легкие 35/40 туфли женские",
+        "price": "170 000",
+        "price_per_month": "12 041 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-mokasiny-dlya-chernyj---1-1955769"
+    },
+    {
+        "title": "Детские кроссовки осень",
+        "price": "139 000",
+        "price_per_month": "9 845 сум/мес",
+        "url": "https://uzum.uz/ru/product/detskie-krossovki-osen-bezhevyj---11-1976978"
+    },
+    {
+        "title": "Ботинки женские DISHER SnowShield, с тёплым мехом, для прогулок (маломерят на 1 размер)",
+        "price": "142 000",
+        "price_per_month": "10 058 сум/мес",
+        "url": "https://uzum.uz/ru/product/botinki-zhenskie-disher-chernyj---1-1940332"
+    },
+    {
+        "title": "Женские домашние тапочки с открытым носком",
+        "price": "44 000",
+        "price_per_month": "3 116 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-domashnie-tapochki-s-otkrytym-noskom-pudrovyj---287-1349418"
+    },
+    {
+        "title": "Кроссовки Samba для женщин и девушек, размеры 36-40",
+        "price": "129 000",
+        "price_per_month": "9 137 сум/мес",
+        "url": "https://uzum.uz/ru/product/krossovki-samba-dlya-belyj---5-1910703"
+    },
+    {
+        "title": "Мужские тапочки, современные тапочки",
+        "price": "47 900",
+        "price_per_month": "3 392 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-tapochki-sovremennye-tapochki-bezhevyj---11-1969523"
+    },
+    {
+        "title": "Женские кроссовки, 36-40 размера, на весну, лету, оосень",
+        "price": "149 000",
+        "price_per_month": "10 554 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-krossovki-3640-belyj---5-1571266"
+    },
+    {
+        "title": "Кроссовки Christian Louboutin, мужские кеды",
+        "price": "299 000",
+        "price_per_month": "21 179 сум/мес",
+        "url": "https://uzum.uz/ru/product/krossovki-christian-louboutin-muzhskie-kedy-sinij---125-1761201"
+    },
+    {
+        "title": "Женские элегантные туфли – для повседневного и праздничного стиля",
+        "price": "99 900",
+        "price_per_month": "7 076 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-elegantnye-tufli-bezhevyj---11-1934831"
+    },
+    {
+        "title": "Женские мягкие и удобные мюли – универсальная обувь на каждый день",
+        "price": "99 900",
+        "price_per_month": "7 076 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-myagkie-i-vishnyovyj---265-1972877"
+    },
+    {
+        "title": "Campus для девочек и женщин, кроссовки Campus для подростков, 36-40",
+        "price": "129 000",
+        "price_per_month": "9 137 сум/мес",
+        "url": "https://uzum.uz/ru/product/campus-dlya-devochek-chernyj---1-1915441"
+    },
+    {
+        "title": "Мужские кроссовки для весны-лета и осени, 39 -44",
+        "price": "111 000",
+        "price_per_month": "7 862 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-krossovki-dlya-vesnyleta-i-oseni-chernyj---1-1659552"
+    },
+    {
+        "title": "Кроссовки мужские, весна-осень, непромокаемые, размер 39-44, 1 размер маломерка",
+        "price": "169 000",
+        "price_per_month": "11 970 сум/мес",
+        "url": "https://uzum.uz/ru/product/krossovki-muzhskie-vesnaosen-chernyj---1-1263932"
+    },
+    {
+        "title": "Valentino Garavani, кроссовки, кеды мужские",
+        "price": "195 000",
+        "price_per_month": "13 812 сум/мес",
+        "url": "https://uzum.uz/ru/product/valentino-garavani-krossovki-kedy-muzhskie-sinij---125-1925432"
+    },
+    {
+        "title": "Мужские туфли из экокожи Salamander, размер 40-44",
+        "price": "79 000",
+        "price_per_month": "5 595 сум/мес",
+        "url": "https://uzum.uz/ru/product/muzhskie-tufli-iz-ekokozhi-salamander-razmer-chernyj---1-1445531"
+    },
+    {
+        "title": "Женские кроссовки, кроссовки весна, весна, Женские обувь, обувь женские, обувь для девушк",
+        "price": "99 000",
+        "price_per_month": "7 012 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-krossovki-krossovki-belyj---5-1955940"
+    },
+    {
+        "title": "Valentino Garavani, кроссовки, мужские кроссовки, размеры 40-44",
+        "price": "169 000",
+        "price_per_month": "11 970 сум/мес",
+        "url": "https://uzum.uz/ru/product/valentino-garavani-krossovki-belyj---5-1979298"
+    },
+    {
+        "title": "Домашние тапочки для женщин",
+        "price": "49 000",
+        "price_per_month": "3 470 сум/мес",
+        "url": "https://uzum.uz/ru/product/domashnie-tapochki-dlya-zhenschin-korallovyj---14-1931636"
+    },
+    {
+        "title": "Женские домашние тапочки с открытым носком",
+        "price": "49 000",
+        "price_per_month": "3 470 сум/мес",
+        "url": "https://uzum.uz/ru/product/zhenskie-domashnie-tapochki-s-otkrytym-noskom-chernyj---1-1349418"
     }
 ]
