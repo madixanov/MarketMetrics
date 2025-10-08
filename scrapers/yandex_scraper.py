@@ -4,15 +4,13 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from config import CHROME_PATH
 import time
 import json
 
 OUTPUT_CATEGORY_FILE = "categories.json"
 
-# =============================
-# Fetchimg Categories from Yandex
-# =============================
 def get_yandex_categories(link):
     options = Options()
     options.add_argument("--headless=new")
@@ -27,7 +25,22 @@ def get_yandex_categories(link):
         driver.get(link)
         wait = WebDriverWait(driver, 15)
 
-        catalog_btn = WebDriverWait(driver, 15).until(
+        # --- Проверка и закрытие модалки ---
+        try:
+            modal = WebDriverWait(driver, 15).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "div[role='dialog']"))
+            )
+            print("Модалка найдена. Закрываем...")
+            close_btn = modal.find_element(By.CSS_SELECTOR, "button[data-auto='close-popup']")
+            close_btn.click()
+            print("Модалка закрыта.")
+            time.sleep(1)
+        except TimeoutException:
+            print("Модалка не появилась — продолжаем дальше.")
+        except NoSuchElementException:
+            print("Кнопка закрытия не найдена — возможно, другая модалка.")
+
+        catalog_btn = wait.until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, "div[data-zone-name='catalog']"))
         )
         catalog_btn.click()
@@ -48,8 +61,8 @@ def get_yandex_categories(link):
                 if title and href:
                     all_categories.append({"title": title, "url": href})
             except Exception as e:
-                print("Ошибка при извлечении категории: ", e)
-    
+                print("Ошибка при извлечении категории:", e)
+
     finally:
         driver.quit()
 
@@ -57,7 +70,6 @@ def get_yandex_categories(link):
         json.dump(all_categories, f, ensure_ascii=False, indent=4)
 
     return all_categories
-
 
 # =============================
 # Fetchimg Products from Yandex
@@ -69,7 +81,7 @@ def get_yandex_products(category_link):
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                          "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36")
 
-    driver = webdriver.Chrome(service=Service(CHROME_PATH), options=options)
+    driver = webdriver.Chrome(service=Service(CHROME_PATH))
     all_products = []
 
     try:
