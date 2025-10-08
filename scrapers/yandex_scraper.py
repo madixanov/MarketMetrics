@@ -137,15 +137,3 @@ def get_yandex_products(category_link):
 
     finally:
         driver.quit()
-
-
-if __name__ == "__main__":
-    category_link = "https://market.yandex.uz/catalog--odezhda-obuv-i-aksessuary/54432/list"
-    products = get_yandex_products(category_link)
-
-    print(f"Найдено товаров: {len(products)}\n")
-    for i, p in enumerate(products, start=1):
-        print(f"{i}. {p['title']}")
-        print(f"   Цена: {p['price']}")
-        print(f"   Рейтинг: {p['rating']}")
-        print(f"   Ссылка: {p['link']}\n")

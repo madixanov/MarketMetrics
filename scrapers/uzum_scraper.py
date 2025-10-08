@@ -70,7 +70,7 @@ def get_uzum_products(category_link):
     options = Options()
     options.add_argument("--headless=new")
     options.add_argument("--window-size=1920,1080")
-    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
                          "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36")
 
     driver = webdriver.Chrome(service=Service(CHROME_PATH), options=options)
@@ -94,6 +94,68 @@ def get_uzum_products(category_link):
                 "price_per_month": price_per_month,
                 "url": url
             })
+
+    finally:
+        driver.quit()
+
+    with open(OUTPUT_PRODUCT_FILE, "w", encoding="utf-8") as f:
+        json.dump(all_products, f, ensure_ascii=False, indent=4)
+
+    return all_products
+
+def get_uzum_top_selling(category_link):
+    options = Options()
+    options.add_argument("--headless=new")
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    )
+
+    driver = webdriver.Chrome(service=Service(CHROME_PATH), options=options)
+    all_products = []
+
+    try:
+        driver.get(category_link)
+        time.sleep(3)
+
+        # Проверяем активный фильтр
+        current_filter = driver.find_element(By.CSS_SELECTOR, "span[data-test-id='text__selected-value']").text
+
+        # Если "Много заказов" уже активен — не трогаем фильтр
+        if "Много заказов" not in current_filter:
+            # Если фильтр другой — открываем и выбираем вручную
+            filter_button = WebDriverWait(driver, 15).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, "span.rotated"))
+            )
+            filter_button.click()
+
+            filter_select_button = WebDriverWait(driver, 15).until(
+                EC.element_to_be_clickable((By.XPATH, "//li[contains(., 'Много заказов')]"))
+            )
+            filter_select_button.click()
+            time.sleep(2)
+
+        # После выбора (или если уже выбрано) — парсим товары
+        filter_products = driver.find_elements(By.CSS_SELECTOR, "a.product-card")
+        for product in filter_products:
+            try:
+                details = product.find_element(By.CSS_SELECTOR, "div.product-card__details")
+                title = details.find_element(By.CSS_SELECTOR, "div.product-card__title").text
+                price = details.find_element(By.CSS_SELECTOR, "span.card-price__regular").text
+                price_per_month = details.find_element(By.CSS_SELECTOR, "span.card-price__installment").text
+                url = product.get_attribute("href")
+                all_products.append({
+                    "title": title,
+                    "price": price,
+                    "price_per_month": price_per_month,
+                    "url": url
+                })
+            except Exception:
+                continue
+
+    except Exception as e:
+        print("Ошибка:", e)
 
     finally:
         driver.quit()

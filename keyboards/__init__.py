@@ -1,1 +1,1 @@
-from .inline import start_keyboard, marketplace_keyboard, uzum_categories_keyboard, yandex_categories_keyboard, yandex_products_keyboard, load_uzum_categories, uzum_products_keyboard, product_details_keyboard
+from .inline import start_keyboard, marketplace_keyboard, uzum_categories_keyboard, yandex_categories_keyboard, yandex_products_keyboard, load_uzum_categories, uzum_products_keyboard, product_details_keyboard, uzum_top_selling_keyboard

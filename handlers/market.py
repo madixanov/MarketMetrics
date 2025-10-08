@@ -5,11 +5,13 @@ from keyboards import (
     uzum_products_keyboard,
     product_details_keyboard,
     yandex_categories_keyboard,
-    yandex_products_keyboard
+    yandex_products_keyboard,
+    uzum_top_selling_keyboard
     )
 from scrapers import (
     get_uzum_categories, 
     get_uzum_products, 
+    get_uzum_top_selling,
     get_yandex_categories,
     get_yandex_products
     )
@@ -117,7 +119,7 @@ async def uzum_category_callback(callback: types.CallbackQuery):
     await callback.message.edit_text(
         f"🛒 Товары категории **{category['title'].replace('.', '\\.')}**\\. Выберите товар ⬇️",
         parse_mode="MarkdownV2",
-        reply_markup=uzum_products_keyboard(products, page=0)
+        reply_markup=uzum_products_keyboard(products, page=0, category_url = category['url'].replace("https://uzum.uz/ru/category/", ""))
     )
 
 
@@ -143,6 +145,35 @@ async def uzum_products_pagination(callback: types.CallbackQuery):
         reply_markup=uzum_products_keyboard(products, page)
     )
 
+
+@market_router.callback_query(lambda c: c.data.startswith("top_"))
+async def top_selling_uzum(callback: types.CallbackQuery):
+    await callback.answer()
+    chat_id = callback.message.chat.id
+
+    category_link = callback.data.replace("top_", "")
+
+    # Уведомляем пользователя
+    loading_msg = await callback.message.answer("⏳ Загружаем самые продаваемые товары с Uzum...")
+
+    try:
+        # Запуск парсера
+        products = get_uzum_top_selling(f"https://uzum.uz/ru/category/{category_link}")
+    except Exception as e:
+        await loading_msg.delete()
+        await callback.message.answer(f"❌ Ошибка при получении товаров: {e}")
+        return
+
+    await loading_msg.delete()
+
+    # Проверяем результат
+    if not products:
+        await callback.message.answer("😢 Не удалось найти топ-продаваемые товары.")
+        return
+
+    # Формируем ответ (до 10 товаров)
+    text = "🔥 **Топ-продаваемые товары Uzum:**\n\n"
+    await callback.message.answer(text, parse_mode="Markdown", reply_markup=uzum_top_selling_keyboard(products, page=0))    
 
 # ===========================
 # Button "Back to categories"

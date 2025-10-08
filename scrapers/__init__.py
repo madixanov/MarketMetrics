@@ -1,2 +1,2 @@
-from .uzum_scraper import get_uzum_categories, get_uzum_products
+from .uzum_scraper import get_uzum_categories, get_uzum_products, get_uzum_top_selling
 from .yandex_scraper import get_yandex_categories, get_yandex_products

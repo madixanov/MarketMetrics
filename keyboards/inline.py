@@ -92,17 +92,24 @@ def uzum_categories_keyboard(categories, page: int = 0):
 # =======================
 # Uzum Products Buttons
 # =======================
-def uzum_products_keyboard(products, page=0):
+def uzum_products_keyboard(products, page=0, category_url=None):
     kb = InlineKeyboardBuilder()
     total = len(products)
     start = page * PRODUCTS_PAGE_SIZE
     end = start + PRODUCTS_PAGE_SIZE
     current_products = products[start:end]
 
+    kb.row(
+        InlineKeyboardButton(
+            text="🔥 Топ Продаж",
+            callback_data=f"top_{category_url}"
+        )
+    )
+
     for i, p in enumerate(current_products, start=start):
         kb.row(InlineKeyboardButton(
             text=p['title'],
-            callback_data=f"product_{i}"  # индекс вместо хэша
+            callback_data=f"product_{i}"
         ))
 
     # Navigation
@@ -117,6 +124,39 @@ def uzum_products_keyboard(products, page=0):
 
     # Back to category
     kb.row(InlineKeyboardButton(text="🔙 Назад", callback_data="back_to_categories"))
+
+    return kb.as_markup()
+
+def uzum_top_selling_keyboard(products, page=0):
+    kb = InlineKeyboardBuilder()
+    total = len(products)
+    start = page * PRODUCTS_PAGE_SIZE
+    end = start + PRODUCTS_PAGE_SIZE
+    current_products = products[start:end]
+
+    for i, p in enumerate(current_products, start=start):
+        kb.row(
+            InlineKeyboardButton(
+                text=p['title'],
+                callback_data=f"product_{i}"
+            )
+        )
+
+    nav_buttons = []
+    if page > 0:
+        nav_buttons.append(
+            InlineKeyboardButton(text="⬅️ Назад", callback_data=f"products_page_{page-1}")
+        )
+    if end < total:
+        nav_buttons.append(
+            InlineKeyboardButton(text="Вперёд ➡️", callback_data=f"products_page_{page+1}")
+        )
+    if nav_buttons:
+        kb.row(*nav_buttons)
+
+    kb.row(
+        InlineKeyboardButton(text="🔙 Назад", callback_data="back_to_categories")
+    )
 
     return kb.as_markup()
 
@@ -169,7 +209,7 @@ def yandex_categories_keyboard(categories, page: int = 0):
 # =======================
 # Yandex Products Buttons
 # =======================
-def yandex_products_keyboard(products, page=0):
+def yandex_products_keyboard(products, category_url, page=0):
     kb = InlineKeyboardBuilder()
     total = len(products)
     start = page * PRODUCTS_PAGE_SIZE
@@ -196,3 +236,4 @@ def yandex_products_keyboard(products, page=0):
     kb.row(InlineKeyboardButton(text="🔙 Назад", callback_data="back_to_categories"))
 
     return kb.as_markup()
+
