@@ -119,12 +119,9 @@ def get_uzum_top_selling(category_link):
         driver.get(category_link)
         time.sleep(3)
 
-        # Проверяем активный фильтр
         current_filter = driver.find_element(By.CSS_SELECTOR, "span[data-test-id='text__selected-value']").text
 
-        # Если "Много заказов" уже активен — не трогаем фильтр
         if "Много заказов" not in current_filter:
-            # Если фильтр другой — открываем и выбираем вручную
             filter_button = WebDriverWait(driver, 15).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, "span.rotated"))
             )
@@ -136,7 +133,6 @@ def get_uzum_top_selling(category_link):
             filter_select_button.click()
             time.sleep(2)
 
-        # После выбора (или если уже выбрано) — парсим товары
         filter_products = driver.find_elements(By.CSS_SELECTOR, "a.product-card")
         for product in filter_products:
             try:
