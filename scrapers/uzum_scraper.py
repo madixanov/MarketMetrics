@@ -103,10 +103,13 @@ def get_uzum_products(category_link):
 
     return all_products
 
+from selenium.webdriver import ActionChains
+
 def get_uzum_top_selling(category_link):
     options = Options()
     options.add_argument("--headless=new")
     options.add_argument("--window-size=1920,1080")
+    options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
@@ -117,30 +120,44 @@ def get_uzum_top_selling(category_link):
 
     try:
         driver.get(category_link)
-        time.sleep(3)
 
-        current_filter = driver.find_element(By.CSS_SELECTOR, "span[data-test-id='text__selected-value']").text
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "a.product-card"))
+        )
 
-        if "Много заказов" not in current_filter:
-            filter_button = WebDriverWait(driver, 15).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, "span.rotated"))
-            )
-            filter_button.click()
+        # Находим и кликаем по сортировке
+        sort_button = WebDriverWait(driver, 15).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "span.rotated"))
+        )
+        ActionChains(driver).move_to_element(sort_button).click().perform()
+        time.sleep(1.5)
 
-            filter_select_button = WebDriverWait(driver, 15).until(
-                EC.element_to_be_clickable((By.XPATH, "//li[contains(., 'Много заказов')]"))
-            )
-            filter_select_button.click()
-            time.sleep(2)
+        # Находим элемент "Много заказов" через XPATH
+        many_orders_option = WebDriverWait(driver, 15).until(
+            EC.element_to_be_clickable((By.XPATH, "//li[contains(., 'Много заказов')]"))
+        )
+        ActionChains(driver).move_to_element(many_orders_option).click().perform()
 
-        filter_products = driver.find_elements(By.CSS_SELECTOR, "a.product-card")
-        for product in filter_products:
+        # Ждём, пока старые карточки исчезнут
+        old_cards = driver.find_elements(By.CSS_SELECTOR, "a.product-card")
+        if old_cards:
+            WebDriverWait(driver, 20).until(EC.staleness_of(old_cards[0]))
+
+        # Ждём, пока появятся новые карточки
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "a.product-card"))
+        )
+        time.sleep(2)
+
+        products = driver.find_elements(By.CSS_SELECTOR, "a.product-card")
+        for product in products:
             try:
                 details = product.find_element(By.CSS_SELECTOR, "div.product-card__details")
                 title = details.find_element(By.CSS_SELECTOR, "div.product-card__title").text
                 price = details.find_element(By.CSS_SELECTOR, "span.card-price__regular").text
                 price_per_month = details.find_element(By.CSS_SELECTOR, "span.card-price__installment").text
                 url = product.get_attribute("href")
+
                 all_products.append({
                     "title": title,
                     "price": price,
@@ -151,7 +168,7 @@ def get_uzum_top_selling(category_link):
                 continue
 
     except Exception as e:
-        print("Ошибка:", e)
+        print("Ошибка при парсинге:", repr(e))  # теперь покажет тип ошибки и сообщение
 
     finally:
         driver.quit()

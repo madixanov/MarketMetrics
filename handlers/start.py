@@ -1,6 +1,7 @@
 from aiogram import Router, types
 from aiogram.filters import CommandStart
 from keyboards import marketplace_keyboard
+from texts import message_texts as mt
 
 start_router = Router()
 
@@ -11,18 +12,7 @@ start_router = Router()
 @start_router.message(CommandStart())
 async def program_start(message: types.Message):
     user = message.from_user.first_name
-    hello_text = (
-        f"👋 Привет, *{user}!* \n\n"
-        "Ты в **Products Insider** 🛍️ — месте, где товары говорят сами за себя!\n\n"
-        "Здесь можно:\n"
-        "📦 Искать товары по категориям\n"
-        "💸 Сравнивать цены и находить выгодные предложения\n"
-        "⭐ Смотреть рейтинги и отзывы покупателей\n"
-        "🔔 Следить за новыми скидками\n\n"
-        "Выбери маркетплейс, с которого начнем поиск 🔽\n\n"
-        "ℹ️ Введи /help, чтобы узнать все доступные команды."
-    )
-    await message.answer(hello_text, parse_mode="Markdown", reply_markup=marketplace_keyboard())
+    await message.answer(mt.TEXTS['start_message'].format(user=user), parse_mode="Markdown", reply_markup=marketplace_keyboard())
 
 
 # ==============
@@ -32,18 +22,6 @@ async def program_start(message: types.Message):
 async def start_button(callback: types.CallbackQuery):
     if callback.message:
         await callback.message.delete()
-
     user = callback.from_user.first_name
-    hello_text = (
-        f"👋 Привет, *{user}!* \n\n"
-        "Ты в **Products Insider** 🛍️ — месте, где товары говорят сами за себя!\n\n"
-        "Здесь можно:\n"
-        "📦 Искать товары по категориям\n"
-        "💸 Сравнивать цены и находить выгодные предложения\n"
-        "⭐ Смотреть рейтинги и отзывы покупателей\n"
-        "🔔 Следить за новыми скидками\n\n"
-        "Выбери маркетплейс, с которого начнем поиск 🔽\n\n"
-        "ℹ️ Введи /help, чтобы узнать все доступные команды."
-    )
-    await callback.message.answer(hello_text, parse_mode="Markdown", reply_markup=marketplace_keyboard())
+    await callback.message.answer(mt.TEXTS['start_message'].format(user=user), parse_mode="Markdown", reply_markup=marketplace_keyboard())
     await callback.answer()

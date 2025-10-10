@@ -1,23 +1,12 @@
 from aiogram import Router, types
 from aiogram.filters import Command
-from keyboards import (
-    uzum_categories_keyboard,
-    uzum_products_keyboard,
-    product_details_keyboard,
-    yandex_categories_keyboard,
-    yandex_products_keyboard,
-    uzum_top_selling_keyboard
-    )
-from scrapers import (
-    get_uzum_categories, 
-    get_uzum_products, 
-    get_uzum_top_selling,
-    get_yandex_categories,
-    get_yandex_products
-    )
+from keyboards import *
+from scrapers import *
 from .start import program_start
+from texts import message_texts as mt
 from selenium.common.exceptions import TimeoutException
 import hashlib
+import json
 
 market_router = Router()
 
@@ -26,6 +15,7 @@ market_router = Router()
 # ==============================
 PAGE_SIZE = 6  
 PRODUCTS_PAGE_SIZE = 6  
+WATCHLIST_FILE = "watchlist.json"
 
 # ==============================
 # Caches for users
@@ -40,7 +30,7 @@ products_cache = {}
 @market_router.message(Command("uzum"))
 async def market_uzum(message: types.Message):
     chat_id = message.chat.id
-    loading_msg = await message.answer("Обновляем категории... ⏳")
+    loading_msg = await message.answer(mt.TEXTS["loading_categories"])
     
     try:
         categories = get_uzum_categories("https://uzum.uz/ru")
@@ -48,13 +38,11 @@ async def market_uzum(message: types.Message):
         await loading_msg.delete()
     except TimeoutException:
         await loading_msg.delete()
-        await message.answer("Не удалось загрузить категории 😢 Попробуйте позже.")
+        await message.answer(mt.TEXTS["no_categories"])
         return
 
     text = (
-        "🛍 Добро пожаловать в 🍇 **Uzum Market**!\n\n"
-        "Выберите категорию, чтобы начать поиск товаров. ⬇️\n\n"
-        "💡 Подсказка: используйте кнопки для навигации — это быстрее и удобнее!"
+        mt.TEXTS["uzum_welcome"]
     )
 
     await message.answer(
@@ -76,12 +64,12 @@ async def uzum_categories_pagination(callback: types.CallbackQuery):
     categories = categories_cache.get(chat_id)
     if not categories:
         await callback.message.edit_text(
-            "Категории пока не загружены 😢\nНажмите /uzum чтобы обновить."
+            mt.TEXTS["category_loading_error"]
         )
         return
 
     await callback.message.edit_text(
-        "🛍 Выберите категорию ⬇️",
+        mt.TEXTS["choose_category"],
         parse_mode="Markdown",
         reply_markup=uzum_categories_keyboard(categories, page)
     )
@@ -103,21 +91,24 @@ async def uzum_category_callback(callback: types.CallbackQuery):
     )
 
     if not category:
-        await callback.message.answer("❌ Не удалось найти категорию.")
+        await callback.message.answer(mt.TEXTS["no_categories"])
         return
 
-    loading_msg = await callback.message.answer(f"⏳ Загружаем товары категории {category['title']}...")
+    loading_msg = await callback.message.answer(
+        f"{mt.TEXTS['loading_products']} {category['title']}...",
+        parse_mode="Markdown"
+    )
     products = get_uzum_products(category["url"])
     await loading_msg.delete()
 
     if not products:
-        await callback.message.answer("Пока нет товаров в этой категории 😢")
+        await callback.message.answer(mt.TEXTS["no_products"])
         return
 
     products_cache[chat_id] = products
 
     await callback.message.edit_text(
-        f"🛒 Товары категории **{category['title'].replace('.', '\\.')}**\\. Выберите товар ⬇️",
+        mt.TEXTS["products"], f"**{category['title'].replace('.', '\\.')}**\\.",
         parse_mode="MarkdownV2",
         reply_markup=uzum_products_keyboard(products, page=0, category_url = category['url'].replace("https://uzum.uz/ru/category/", ""))
     )
@@ -134,10 +125,10 @@ async def uzum_products_pagination(callback: types.CallbackQuery):
 
     products = products_cache.get(chat_id)
     if not products:
-        await callback.message.answer("Товары пока не загружены 😢")
+        await callback.message.answer(mt.TEXTS["products_load_error"])
         return
 
-    text = "🛒 Товары категории:\n\n"
+    text = mt.TEXTS["products_list"] + "\n\n"
 
     await callback.message.edit_text(
         text,
@@ -154,26 +145,28 @@ async def top_selling_uzum(callback: types.CallbackQuery):
     category_link = callback.data.replace("top_", "")
 
     # Уведомляем пользователя
-    loading_msg = await callback.message.answer("⏳ Загружаем самые продаваемые товары с Uzum...")
+    loading_msg = await callback.message.answer(mt.TEXTS["loading_top"])
 
     try:
         # Запуск парсера
         products = get_uzum_top_selling(f"https://uzum.uz/ru/category/{category_link}")
     except Exception as e:
         await loading_msg.delete()
-        await callback.message.answer(f"❌ Ошибка при получении товаров: {e}")
+        await callback.message.answer(mt.TEXTS["error_parsing"], e)
         return
 
     await loading_msg.delete()
 
     # Проверяем результат
     if not products:
-        await callback.message.answer("😢 Не удалось найти топ-продаваемые товары.")
+        await callback.message.answer(mt.TEXTS["no_products"])
         return
 
     # Формируем ответ (до 10 товаров)
     text = "🔥 **Топ-продаваемые товары Uzum:**\n\n"
     await callback.message.answer(text, parse_mode="Markdown", reply_markup=uzum_top_selling_keyboard(products, page=0))    
+
+    
 
 # ===========================
 # Button "Back to categories"
@@ -195,12 +188,12 @@ async def product_detail_callback(callback: types.CallbackQuery):
     chat_id = callback.message.chat.id
     products = products_cache.get(chat_id)
     if not products:
-        await callback.message.answer("Товары пока не загружены 😢")
+        await callback.message.answer(mt.TEXTS["no_products"])
         return
 
     index = int(callback.data.split("_")[-1])
     if index >= len(products):
-        await callback.message.answer("Товар не найден 😢")
+        await callback.message.answer(mt.TEXTS["no_such_product"])
         return
 
     product = products[index]
@@ -211,7 +204,110 @@ async def product_detail_callback(callback: types.CallbackQuery):
         f"🔗 [Открыть в Uzum]({product['url']})"
     )
 
-    await callback.message.answer(text, parse_mode="Markdown", reply_markup=product_details_keyboard(product))
+    await callback.message.answer(text, parse_mode="Markdown", reply_markup=product_details_keyboard(product, index))
+
+@market_router.callback_query(lambda c: c.data == "watchlist")
+async def view_watchlist(callback: types.CallbackQuery):
+    await callback.answer()
+    chat_id = str(callback.message.chat.id)
+
+    try:
+        with open(WATCHLIST_FILE, "r", encoding="utf-8") as f:
+            watchlist = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        watchlist = {}
+
+    user_watchlist = watchlist.get(chat_id, [])
+
+    if not user_watchlist:
+        await callback.message.answer(mt.TEXTS["watchlist_empty"])
+        return
+
+    await callback.message.answer(
+        mt.TEXTS["watchlist_header"],
+        reply_markup=watchlist_keyboard(user_watchlist)
+    )
+
+
+# Просмотр товара
+@market_router.callback_query(lambda c: c.data.startswith("view_item:"))
+async def view_item(callback: types.CallbackQuery):
+    await callback.answer()
+    item_id = callback.data.split(":")[1]
+
+    with open(WATCHLIST_FILE, "r", encoding="utf-8") as f:
+        watchlist = json.load(f)
+
+    user_watchlist = watchlist.get(str(callback.message.chat.id), [])
+    for item in user_watchlist:
+        if hashlib.md5(item["url"].encode()).hexdigest()[:10] == item_id:
+            text = (
+                f"🛍 **{item['title']}**\n"
+                f"💰 Цена: {item['price1']} сум\n"
+                f"[🔗 Перейти к товару]({item['url']})"
+            )
+            await callback.message.answer(text, parse_mode="Markdown", reply_markup=watchlist_item_keyboard(item))
+            return
+
+
+# Удаление товара
+@market_router.callback_query(lambda c: c.data.startswith("del_item:"))
+async def delete_item(callback: types.CallbackQuery):
+    await callback.answer()
+    item_id = callback.data.split(":")[1]
+    chat_id = str(callback.message.chat.id)
+
+    with open(WATCHLIST_FILE, "r", encoding="utf-8") as f:
+        watchlist = json.load(f)
+
+    user_watchlist = watchlist.get(chat_id, [])
+    new_watchlist = [
+        i for i in user_watchlist
+        if hashlib.md5(i["url"].encode()).hexdigest()[:10] != item_id
+    ]
+    watchlist[chat_id] = new_watchlist
+
+    with open(WATCHLIST_FILE, "w", encoding="utf-8") as f:
+        json.dump(watchlist, f, ensure_ascii=False, indent=4)
+
+    await callback.message.answer(mt.TEXTS["delete_success"])
+
+@market_router.callback_query(lambda c: c.data.startswith("add_to_watchlist_"))
+async def add_to_watchlist(callback: types.CallbackQuery):
+    await callback.answer()
+    chat_id = str(callback.message.chat.id)
+    index = int(callback.data.split("_")[-1])
+
+    products = products_cache.get(callback.message.chat.id)
+    if not products or index >= len(products):
+        await callback.message.answer(mt.TEXTS["product_not_found"])
+        return
+
+    product = products[index]
+
+    try:
+        with open(WATCHLIST_FILE, "r", encoding="utf-8") as f:
+            watchlist = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        watchlist = {}
+
+    if chat_id not in watchlist:
+        watchlist[chat_id] = []
+
+    if any(item["url"] == product["url"] for item in watchlist[chat_id]):
+        await callback.message.answer(mt.TEXTS["already_in_watchlist"])
+        return
+
+    watchlist[chat_id].append({
+        "title": product["title"],
+        "price1": product["price"],
+        "url": product["url"]
+    })
+
+    with open(WATCHLIST_FILE, "w", encoding="utf-8") as f:
+        json.dump(watchlist, f, ensure_ascii=False, indent=4)
+
+    await callback.message.answer(mt.TEXTS["add_success"])
 
 @market_router.callback_query(lambda c: c.data.startswith("yandex_product_"))
 async def yandex_product_detail_callback(callback: types.CallbackQuery):
@@ -219,12 +315,12 @@ async def yandex_product_detail_callback(callback: types.CallbackQuery):
     chat_id = callback.message.chat.id
     products = products_cache.get(chat_id)
     if not products:
-        await callback.message.answer("Товары пока не загружены 😢")
+        await callback.message.answer(mt.TEXTS["products_load_error"])
         return
 
     index = int(callback.data.split("_")[-1])
     if index >= len(products):
-        await callback.message.answer("Товар не найден 😢")
+        await callback.message.answer(mt.TEXTS["no_such_product"])
         return
 
     product = products[index]
@@ -235,7 +331,7 @@ async def yandex_product_detail_callback(callback: types.CallbackQuery):
         f"🔗 [Открыть в Yandex]({product['url']})"
     )
 
-    await callback.message.answer(text, parse_mode="Markdown", reply_markup=product_details_keyboard(product))
+    await callback.message.answer(text, parse_mode="Markdown", reply_markup=product_details_keyboard(product, index))
 
 
 # =========================
@@ -254,7 +350,7 @@ async def back_to_products(callback: types.CallbackQuery):
 @market_router.message(Command("yandex"))
 async def market_yandex(message: types.Message):
     chat_id = message.chat.id
-    loading_msg = await message.answer("Обновляем категории... ⏳")
+    loading_msg = await message.answer(mt.TEXTS["loading_categories"])
 
     try:
         categories = get_yandex_categories("https://market.yandex.uz/")
@@ -262,13 +358,11 @@ async def market_yandex(message: types.Message):
         await loading_msg.delete()
     except TimeoutException:
         await loading_msg.delete()
-        await message.answer("Категории пока не загружены 😢\nНажмите /yandex чтобы обновить.")
+        await message.answer(mt.TEXTS["no_categories_y"])
         return
 
     text = (
-        "🛍 Добро пожаловать в 🟨 **Yandex Market**!\n\n"
-        "Выберите категорию, чтобы начать поиск товаров. ⬇️\n\n"
-        "💡 Подсказка: используйте кнопки для навигации — это быстрее и удобнее!"
+        mt.TEXTS["yandex_welcome"]
     )
 
     await message.answer(
@@ -287,12 +381,12 @@ async def yandex_categories_pagination(callback: types.CallbackQuery):
     categories = categories_cache.get(chat_id)
     if not categories:
         await callback.message.edit_text(
-            "Категории пока не загружены 😢\nНажмите /yandex чтобы обновить."
+            mt.TEXTS["no_categories_y"]
         )
         return
 
     await callback.message.edit_text(
-        "🛍 Выберите категорию ⬇️",
+        mt.TEXTS["choose_category"],
         parse_mode="Markdown",
         reply_markup=yandex_categories_keyboard(categories, page)
     )
@@ -314,21 +408,24 @@ async def yandex_category_callback(callback: types.CallbackQuery):
     )
 
     if not category:
-        await callback.message.answer("❌ Не удалось найти категорию.")
+        await callback.message.answer(mt.TEXTS["not_found"])
         return
 
-    loading_msg = await callback.message.answer(f"⏳ Загружаем товары категории **{category['title']}...**", parse_mode="Markdown",)
+    loading_msg = await callback.message.answer(
+        f"{mt.TEXTS['loading_products']} {category['title']}...",
+        parse_mode="Markdown"
+    )
     products = get_yandex_products(category["url"])
     await loading_msg.delete()
 
     if not products:
-        await callback.message.answer("Пока нет товаров в этой категории 😢")
+        await callback.message.answer(mt.TEXTS["no_products"])
         return
 
     products_cache[chat_id] = products
 
     await callback.message.edit_text(
-        f"🛒 Товары категории **{category['title'].replace('.', '\\.')}**\\. Выберите товар ⬇️",
+        mt.TEXTS["products"], f"**{category['title'].replace('.', '\\.')}**\\.",
         parse_mode="MarkdownV2",
         reply_markup=yandex_products_keyboard(products, page=0)
     )
@@ -342,10 +439,10 @@ async def yandex_products_pagination(callback: types.CallbackQuery):
 
     products = products_cache.get(chat_id)
     if not products:
-        await callback.message.answer("Товары пока не загружены 😢")
+        await callback.message.answer(mt.TEXTS["products_load_error"])
         return
 
-    text = "🛒 Товары категории:\n\n"
+    text = mt.TEXTS["products_list"] + "\n\n"
 
     await callback.message.edit_text(
         text,

@@ -1,6 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from pathlib import Path
+from texts import button_texts as bt
 import hashlib
 import json
 
@@ -32,7 +33,7 @@ def load_uzum_categories():
 def start_keyboard():
     kb = InlineKeyboardBuilder()
     kb.row(
-        InlineKeyboardButton(text="🚀 Start", callback_data="start_bot")
+        InlineKeyboardButton(text=bt.start, callback_data="start_bot")
     )
     return kb.as_markup()
 
@@ -43,9 +44,10 @@ def start_keyboard():
 def marketplace_keyboard():
     kb = InlineKeyboardBuilder()
     kb.row(
-        InlineKeyboardButton(text="🍇 Uzum Market", callback_data="market_uzum"),
-        InlineKeyboardButton(text="🟨 Yandex Market", callback_data="market_yandex")
+        InlineKeyboardButton(text=bt.uzum, callback_data="market_uzum"),
+        InlineKeyboardButton(text=bt.yandex, callback_data="market_yandex")
     )
+    kb.row(InlineKeyboardButton(text=bt.watchlist, callback_data="watchlist"))
     return kb.as_markup()
 
 
@@ -76,15 +78,15 @@ def uzum_categories_keyboard(categories, page: int = 0):
     # Navigation
     nav_buttons = []
     if page > 0:
-        nav_buttons.append(InlineKeyboardButton(text="⬅️ Назад", callback_data=f"uzum_page_{page - 1}"))
+        nav_buttons.append(InlineKeyboardButton(text=bt.previous_page, callback_data=f"uzum_page_{page - 1}"))
     if end < total:
-        nav_buttons.append(InlineKeyboardButton(text="Вперёд ➡️", callback_data=f"uzum_page_{page + 1}"))
+        nav_buttons.append(InlineKeyboardButton(text=bt.next_page, callback_data=f"uzum_page_{page + 1}"))
 
     if nav_buttons:
         kb.row(*nav_buttons)
 
     # Back button
-    kb.row(InlineKeyboardButton(text="🔙 Назад", callback_data="start_bot"))
+    kb.row(InlineKeyboardButton(text=bt.back, callback_data="start_bot"))
 
     return kb.as_markup()
 
@@ -101,7 +103,7 @@ def uzum_products_keyboard(products, page=0, category_url=None):
 
     kb.row(
         InlineKeyboardButton(
-            text="🔥 Топ Продаж",
+            text=bt.top_selling,
             callback_data=f"top_{category_url}"
         )
     )
@@ -115,15 +117,15 @@ def uzum_products_keyboard(products, page=0, category_url=None):
     # Navigation
     nav_buttons = []
     if page > 0:
-        nav_buttons.append(InlineKeyboardButton(text="⬅️ Назад", callback_data=f"products_page_{page - 1}"))
+        nav_buttons.append(InlineKeyboardButton(text=bt.previous_page, callback_data=f"products_page_{page - 1}"))
     if end < total:
-        nav_buttons.append(InlineKeyboardButton(text="Вперёд ➡️", callback_data=f"products_page_{page + 1}"))
+        nav_buttons.append(InlineKeyboardButton(text=bt.next_page, callback_data=f"products_page_{page + 1}"))
 
     if nav_buttons:
         kb.row(*nav_buttons)
 
     # Back to category
-    kb.row(InlineKeyboardButton(text="🔙 Назад", callback_data="back_to_categories"))
+    kb.row(InlineKeyboardButton(text=bt.back, callback_data="back_to_categories"))
 
     return kb.as_markup()
 
@@ -145,17 +147,17 @@ def uzum_top_selling_keyboard(products, page=0):
     nav_buttons = []
     if page > 0:
         nav_buttons.append(
-            InlineKeyboardButton(text="⬅️ Назад", callback_data=f"products_page_{page-1}")
+            InlineKeyboardButton(text=bt.previous_page, callback_data=f"products_page_{page-1}")
         )
     if end < total:
         nav_buttons.append(
-            InlineKeyboardButton(text="Вперёд ➡️", callback_data=f"products_page_{page+1}")
+            InlineKeyboardButton(text=bt.next_page, callback_data=f"products_page_{page+1}")
         )
     if nav_buttons:
         kb.row(*nav_buttons)
 
     kb.row(
-        InlineKeyboardButton(text="🔙 Назад", callback_data="back_to_categories")
+        InlineKeyboardButton(text=bt.back, callback_data="back_to_categories")
     )
 
     return kb.as_markup()
@@ -164,12 +166,56 @@ def uzum_top_selling_keyboard(products, page=0):
 # ============================
 # Uzum Product Details Buttons
 # ============================
-def product_details_keyboard(product):
+def product_details_keyboard(product, index: int):
     kb = InlineKeyboardBuilder()
 
-    kb.row(InlineKeyboardButton(text="🔗 Перейти по ссылке", url=product['url']))
-    kb.row(InlineKeyboardButton(text="🔙 Назад", callback_data="back_to_products"))
+    kb.row(InlineKeyboardButton(text=bt.link, url=product['url']))
+    kb.row(InlineKeyboardButton(text=bt.add_to_watchlist, callback_data=f"add_to_watchlist_{index}"))
+    kb.row(InlineKeyboardButton(text=bt.back, callback_data="back_to_products"))
 
+    return kb.as_markup()
+
+def watchlist_keyboard(watchlist):
+    kb = InlineKeyboardBuilder()
+
+    for index, item in enumerate(watchlist):
+        # создаём короткий хеш ID для callback
+        short_id = hashlib.md5(item['url'].encode()).hexdigest()[:10]
+        kb.row(
+            InlineKeyboardButton(
+                text=item["title"][:40],
+                callback_data=f"view_item:{short_id}"
+            )
+        )
+
+    kb.row(InlineKeyboardButton(text=bt.back, callback_data="start_bot"))
+    return kb.as_markup()
+
+
+def watchlist_item_keyboard(item):
+    kb = InlineKeyboardBuilder()
+
+    # создаём короткий ID для callback
+    short_id = hashlib.md5(item['url'].encode()).hexdigest()[:10]
+
+    kb.row(
+        InlineKeyboardButton(
+            text=bt.link,
+            url=item['url']
+        )
+    )
+    kb.row(
+        InlineKeyboardButton(
+            text=bt.remove_from_watchlist,
+            callback_data=f"del_item:{short_id}"
+        )
+    )
+    kb.row(
+        InlineKeyboardButton(
+            text=bt.back,
+            callback_data="watchlist"
+        )
+    )
     return kb.as_markup()
 
 
@@ -193,15 +239,15 @@ def yandex_categories_keyboard(categories, page: int = 0):
     # Navigation
     nav_buttons = []
     if page > 0:
-        nav_buttons.append(InlineKeyboardButton(text="⬅️ Назад", callback_data=f"yandex_page_{page - 1}"))
+        nav_buttons.append(InlineKeyboardButton(text=bt.previous_page, callback_data=f"yandex_page_{page - 1}"))
     if end < total:
-        nav_buttons.append(InlineKeyboardButton(text="Вперёд ➡️", callback_data=f"yandex_page_{page + 1}"))
+        nav_buttons.append(InlineKeyboardButton(text=bt.next_page, callback_data=f"yandex_page_{page + 1}"))
 
     if nav_buttons:
         kb.row(*nav_buttons)
 
     # Back button
-    kb.row(InlineKeyboardButton(text="🔙 В меню", callback_data="start_bot"))
+    kb.row(InlineKeyboardButton(text=bt.back, callback_data="start_bot"))
 
     return kb.as_markup()
 
@@ -209,7 +255,7 @@ def yandex_categories_keyboard(categories, page: int = 0):
 # =======================
 # Yandex Products Buttons
 # =======================
-def yandex_products_keyboard(products, category_url, page=0):
+def yandex_products_keyboard(products, page=0):
     kb = InlineKeyboardBuilder()
     total = len(products)
     start = page * PRODUCTS_PAGE_SIZE
@@ -219,21 +265,21 @@ def yandex_products_keyboard(products, category_url, page=0):
     for i, p in enumerate(current_products, start=start):
         kb.row(InlineKeyboardButton(
             text=p['title'],
-            callback_data=f"yandex_product_{i}"  # индекс вместо хэша
+            callback_data=f"yandex_product_{i}" 
         ))
 
     # Navigation
     nav_buttons = []
     if page > 0:
-        nav_buttons.append(InlineKeyboardButton(text="⬅️ Назад", callback_data=f"yandex_products_page_{page - 1}"))
+        nav_buttons.append(InlineKeyboardButton(text=bt.previous_page, callback_data=f"yandex_products_page_{page - 1}"))
     if end < total:
-        nav_buttons.append(InlineKeyboardButton(text="Вперёд ➡️", callback_data=f"yandex_products_page_{page + 1}"))
+        nav_buttons.append(InlineKeyboardButton(text=bt.next_page, callback_data=f"yandex_products_page_{page + 1}"))
 
     if nav_buttons:
         kb.row(*nav_buttons)
 
     # Back to category
-    kb.row(InlineKeyboardButton(text="🔙 Назад", callback_data="back_to_categories"))
+    kb.row(InlineKeyboardButton(text=bt.back, callback_data="back_to_categories"))
 
     return kb.as_markup()
 
