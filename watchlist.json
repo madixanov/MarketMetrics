@@ -1,29 +1,57 @@
 {
-    "911602332": [
+  "911602332": [
+    {
+      "title": "Браслет женский",
+      "url": "https://uzum.uz/ru/product/braslet-zhenskij-prozrachnyj---234-1716276?skuId=6400850",
+      "added_at": "2025-10-11 13:16:48",
+      "history": [
         {
-            "title": "Часы наручные, женские, квадратные",
-            "price1": "29 990",
-            "url": "https://uzum.uz/ru/product/chasy-naruchnye-zhenskie-kvadratnye-chernyj---1-1756285?skuId=6052539"
+          "date": "2025-10-11",
+          "price": 9590
         },
         {
-            "title": "Загуститель для волос Toppik, 27.5 г, Caboki Dexe",
-            "price1": "67 000",
-            "url": "https://uzum.uz/ru/product/zagustitel-dlya-volos-toppik-275-g-chernyj---1-450317?skuId=847035"
+          "date": "2025-10-11",
+          "price": " 9 590 "
         },
         {
-            "title": "Мини вафельница, электрическая, для венских и бельгийских вафель с антипригарным покрытием",
-            "price1": "84 000",
-            "url": "https://uzum.uz/ru/product/mini-vafelnica-elektricheskaya-1817288?skuId=6339860"
-        },
-        {
-            "title": "Ручной вертикальный пылесос Magna VCH306S, проводной, HEPA фильтр, 600 Вт",
-            "price1": "389 000",
-            "url": "https://uzum.uz/ru/product/ruchnoj-vertikalnyj-pylesos-1608516?skuId=5348493"
-        },
-        {
-            "title": "Чоппер измельчитель BS-888, 4800 Вт, 3.8 л, чоппер, блендер, миксер, соковыжималка",
-            "price1": "116 411",
-            "url": "https://market.yandex.uz/card/chopper-izmelchitel-bo-888-4800-vt-38-l/4515648405?hid=90401&show-uid=17601002359281599704806001&nid=54419&from=search&cpa=1&do-waremd5=BL7UZI-VUNCPf8W2svbJiQ&cpc=2Km6bcKyIPPrNedXjSK_ILLknL8hf4hR7uwpdVWsCAXNMknAkeoyPx6GQgTbjMyWEoJqIyRLW_JUYJFCu7LgX10JwFjSNUKfACDA9PwJd3V5JcJPqSSzkvXEy_qpXV6dEmoDHYkCtKS-YFledlF9j2niEQyyy5A23-lM8eV4mhrAs2wJlUPGByM4R9Iv0XghoTPMHiS_iKqtNlL2c9yxqJd9wkB0qsmCuHO3yE56KADw1I1zfaKofEDKh9sjm70q2Fe1ZxA5_ef5See8XqVzZhKGXYh6rXRSJEx_e03zxUwm-J7F1O_8vlrwblwvgiIXmH_jL0hoL0714FVMPv7E7cvkD3oMaw1h7pGIm1DJnTfoMBOIxxbw2n1XBQYSEO2WDE_h9o8STQ0XoTOQ8yhpWF0S0Nwlqq8I2O8ThKgrmXN0o2SccdM9gjsV2dkVcgymRJs3XeARdI6PUB44UC4u4f7iXu_Yjgm2Xzbv8oyHZfQ6pJ3oB2ue9IlKdGmdjysBommLGM53ot1EDrjTGgS1uZ1nAcU7VC5yBI0VhDdD8hfyXvAoLS9centJH2N3M_yY0RUbgWBfT-XGZ030vE5ZzArQidCSMBUs&cc=CiBmMDQ5MjI2YTdjNDNmZDQxYjAwZTY0OTBjMmQxZmQ2OBAHgH3m7QY%2C"
+          "date": "2025-10-11",
+          "price": " 9 590 "
         }
-    ]
+      ]
+    },
+    {
+      "title": "Беспроводные наушники Huawei FreeBuds 6i, с шумоподавлением IP54, Bluetooth 5.3",
+      "url": "https://uzum.uz/ru/product/besprovodnye-naushniki-huawei-chernyj---1-1712311?skuId=5859126",
+      "added_at": "2025-10-11 13:30:18",
+      "history": [
+        {
+          "date": "2025-10-11",
+          "price": 699000
+        },
+        {
+          "date": "2025-10-11",
+          "price": " 699 000 "
+        },
+        {
+          "date": "2025-10-11",
+          "price": " 699 000 "
+        }
+      ]
+    },
+    {
+      "title": "Липучка, держатель для телефона, держатель, липпер, с присосками",
+      "url": "https://uzum.uz/ru/product/lipuchka-derzhatel-dlya-chernyj---1-1432274?skuId=4653395",
+      "added_at": "2025-10-11 13:35:48",
+      "history": [
+        {
+          "date": "2025-10-11",
+          "price": "10 000"
+        },
+        {
+          "date": "2025-10-11",
+          "price": " 10 000 "
+        }
+      ]
+    }
+  ]
 }

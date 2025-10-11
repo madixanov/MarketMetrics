@@ -76,6 +76,7 @@ source .venv/bin/activate
 # Install the required packages:
 
 ```bash
+python -m pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
 ```
 
@@ -179,6 +180,7 @@ Technology	Purpose
 Python 3.11+	-> Core language
 Aiogram ->	Telegram bot framework
 Selenium	-> Web automation and scraping
+APScheduler -> Schedulus updates on price of products in Favourites
 Asyncio ->	Asynchronous operations
 python-dotenv ->	Environment configuration
 JSON ->	Local data storage

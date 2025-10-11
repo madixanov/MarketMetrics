@@ -7,6 +7,7 @@ from texts import message_texts as mt
 from selenium.common.exceptions import TimeoutException
 import hashlib
 import json
+from datetime import datetime
 
 market_router = Router()
 
@@ -241,11 +242,36 @@ async def view_item(callback: types.CallbackQuery):
     user_watchlist = watchlist.get(str(callback.message.chat.id), [])
     for item in user_watchlist:
         if hashlib.md5(item["url"].encode()).hexdigest()[:10] == item_id:
+            # Преобразуем дату из ISO в красивый вид: "11 октября"
+            history_text = ""
+            for h in item["history"][-7:]:
+                try:
+                    date_obj = datetime.strptime(h["date"], "%Y-%m-%d")
+                    formatted_date = date_obj.strftime("%d %B")  # Пример: 11 октября
+                except ValueError:
+                    formatted_date = h["date"]
+
+                history_text += f"📅 {formatted_date}: {h['price']} сум\n"
+
+            current_price = item["history"][-1]["price"] if item["history"] else "—"
+
+            # Преобразуем дату добавления, если есть
+            added_info = ""
+            if "added_at" in item:
+                try:
+                    added_date = datetime.strptime(item["added_at"], "%Y-%m-%d %H:%M:%S")
+                    added_info = f"📦 Добавлено: {added_date.strftime('%d %B %Y, %H:%M')}\n"
+                except ValueError:
+                    added_info = f"📦 Добавлено: {item['added_at']}\n"
+
             text = (
                 f"🛍 **{item['title']}**\n"
-                f"💰 Цена: {item['price1']} сум\n"
+                f"{added_info}"
+                f"💰 Текущая цена: {current_price} сум\n\n"
+                f"📊 История цен:\n\n{history_text}\n"
                 f"[🔗 Перейти к товару]({item['url']})"
             )
+
             await callback.message.answer(text, parse_mode="Markdown", reply_markup=watchlist_item_keyboard(item))
             return
 
@@ -300,9 +326,15 @@ async def add_to_watchlist(callback: types.CallbackQuery):
 
     watchlist[chat_id].append({
         "title": product["title"],
-        "price1": product["price"],
-        "url": product["url"]
+        "url": product["url"],
+        "added_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "history": [
+            {"date": datetime.now().strftime("%Y-%m-%d"), "price": product["price"]}
+        ],
     })
+
+    with open(WATCHLIST_FILE, "w", encoding="utf-8") as f:
+        json.dump(watchlist, f, ensure_ascii=False, indent=2)
 
     with open(WATCHLIST_FILE, "w", encoding="utf-8") as f:
         json.dump(watchlist, f, ensure_ascii=False, indent=4)
